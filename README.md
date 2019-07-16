@@ -1,3 +1,3 @@
-# doc.sh
+# doc.js
 
 Document generator

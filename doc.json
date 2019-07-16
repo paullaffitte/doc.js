@@ -1,0 +1,32 @@
+{
+	"title": "Test",
+	"object": "Test document",
+	"authors": [ "Paul Laffitte" ],
+	"emails": [ "paul.laffitte@epitech.eu" ],
+	"keywords": [ "test", "pdf", "html" ],
+	"updated": "14/07/2019",
+	"version": "1.1.1",
+	"revisions": [
+		{
+			"date": "14/07/2019",
+			"version": "1.0.0",
+			"authors": [ "Paul Laffitte", "Author 2" ],
+			"sections": [ "All", "Generation" ],
+			"comments": "Test"
+		},
+		{
+			"date": "14/07/2019",
+			"version": "1.1.0",
+			"authors": [],
+			"sections": [ "Test" ],
+			"comments": "42"
+		},
+		{
+			"date": "14/07/2019",
+			"version": "1.1.1",
+			"authors": [],
+			"sections": [],
+			"comments": "1337"
+		}
+	]
+}

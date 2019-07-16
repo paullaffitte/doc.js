@@ -1,0 +1,15 @@
+{
+  "name": "@paullaffitte/doc",
+  "version": "0.0.0",
+  "author": "Paul Laffitte",
+  "license": "MIT",
+  "scripts": {
+    "pandoc": "pandoc prebuild.md --metadata title=doc --to=pdf -o doc.pdf -t html5",
+    "prebuild": "./prebuild.js > prebuild.md",
+    "build": "yarn prebuild && yarn pandoc",
+    "clean": "rm -vf *.pdf *.log prebuild.md"
+  },
+  "dependencies": {
+    "markdown-table": "^1.1.3"
+  }
+}
