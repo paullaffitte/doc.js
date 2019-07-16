@@ -1,0 +1,15 @@
+{
+  "name": "doc.sh",
+  "version": "1.0.0",
+  "author": "Paul Laffitte",
+  "license": "MIT",
+  "scripts": {
+    "pandoc": "pandoc advancement_reports.md tables.md --to=pdf -o PLD.pdf -t html5",
+    "prebuild": "./prebuild.js > tables.md",
+    "build": "yarn prebuild && yarn pandoc",
+    "clean": "rm -vf *.pdf *.log tables.md"
+  },
+  "dependencies": {
+    "markdown-table": "^1.1.3"
+  }
+}
