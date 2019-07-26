@@ -3,6 +3,8 @@
 const execa = require('execa');
 const commander = require('commander');
 const fs = require('fs').promises;
+const path = require('path');
+const prebuild = require('./prebuild');
 
 function parseFormat(value) {
 	const allowedFormats = [ 'pdf', 'html', 'md' ];
@@ -18,27 +20,34 @@ commander
 	.option('-f, --format <extension>', 'output format', parseFormat)
 	.parse(process.argv);
 
-const inputs = [ 'build/title_and_information.md', 'data/advancement_reports.md' ];
-
-async function buildMarkdown() {
+async function buildMarkdown(documentName) {
 	const files = await Promise.all(inputs.map(filename => fs.readFile(filename)));
 	const content = files.reduce((acc, file) => acc + file.toString(), '');
 
-	fs.writeFile('PLD.md', new Uint8Array(...files));
+	fs.writeFile(`${documentName}.md`, new Uint8Array(...files));
 }
 
+if (commander.args.length < 1)
+	throw new Error('Missing filename');
 if (!commander.format)
 	commander.format = 'pdf';
 
-if (commander.format == 'md') {
-	buildMarkdown();
-} else {
-	execa('pandoc', [
-		...inputs,
-		'-o', `./build/PLD.${commander.format}`,
-		'--from', 'markdown+auto_identifiers+header_attributes',
-		'-t', 'html5'
-	]).catch(err => {
-		console.error(err);
-	});
-}
+const filename = commander.args[0];
+const documentName = path.parse(filename).name;
+
+prebuild(filename).then(() => {
+	if (commander.format == 'md') {
+		buildMarkdown(documentName);
+	} else {
+		execa('pandoc', [
+			'build/prebuild.md',
+			'-o', `./build/${documentName}.${commander.format}`,
+			'--from', 'markdown+auto_identifiers+header_attributes',
+			'-t', 'html5'
+		])
+		.then(() => fs.unlink('build/prebuild.md'))
+		.catch(err => {
+			console.error(err);
+		});
+	}
+});
