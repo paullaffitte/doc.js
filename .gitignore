@@ -1,5 +1,5 @@
 node_modules
-prebuild.md
+build
 *.pdf
 *.html
 *.log
