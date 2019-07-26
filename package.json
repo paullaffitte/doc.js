@@ -4,12 +4,14 @@
   "author": "Paul Laffitte",
   "license": "MIT",
   "scripts": {
-    "pandoc": "pandoc advancement_reports.md tables.md --to=pdf -o PLD.pdf -t html5",
-    "prebuild": "./prebuild.js > tables.md",
-    "build": "yarn prebuild && yarn pandoc",
-    "clean": "rm -vf *.pdf *.log tables.md"
+    "prebuild": "./src/prebuild.js",
+    "build": "./src/build.js",
+    "clean": "rm -rvf build"
   },
   "dependencies": {
-    "markdown-table": "^1.1.3"
+    "commander": "^2.20.0",
+    "execa": "^2.0.3",
+    "markdown-table": "^1.1.3",
+    "mkdirp": "^0.5.1"
   }
 }
