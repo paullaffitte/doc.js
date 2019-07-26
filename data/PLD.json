@@ -1,13 +1,17 @@
 {
-	"title": "PLD",
-	"object": "Objectifs du premier sprint de 3 mois",
-	"authors": [ "Pierre Pinet", "Paul Laffitte" ],
-	"responsible": "Jean Noriot",
-	"emails": [ "pierre.pinet@epitech.eu", "paul.laffitte@epitech.eu", "eip@epitech.eu" ],
-	"keywords": [ "logs", "stories", "livrables", "évolution" ],
-	"promotion": 2021,
-	"updated": "14/07/2019",
-	"version": "2.1.0",
+	"metadata": {
+		"title": "PLD",
+		"company": "Teksploit",
+		"object": "Objectifs du premier sprint de 3 mois",
+		"authors": [ "Pierre Pinet", "Paul Laffitte" ],
+		"responsible": "Jean Noriot",
+		"emails": [ "pierre.pinet@epitech.eu", "paul.laffitte@epitech.eu", "eip@epitech.eu" ],
+		"keywords": [ "logs", "stories", "livrables", "évolution" ],
+		"promotion": 2021,
+		"updated": "14/07/2019",
+		"version": "2.1.0"
+	},
+	"prebuild": "PLD.js",
 	"revisions": [
 		{
 			"date": "31/03/2019",

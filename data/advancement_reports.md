@@ -1,6 +1,6 @@
 **17/06/2019 - Rapport d’avancement pour le Delivery du premier sprint**
 
-Pour le Delivery de notre premier sprint, nous sommes parvenus à ~70% de complétion des tâches.
+Pour le Delivery de notre premier sprint, nous sommes parvenus à \~70% de complétion des tâches.
 
 Les réalisations sont :
 

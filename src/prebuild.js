@@ -1,36 +1,36 @@
 #! /usr/bin/env node
 
 const table = require('markdown-table');
-const fs = require('fs').promises;
+const fs = require('fs');
+const path = require('path');
 const mkdirp = require('mkdirp').sync;
-const { revisions, ...doc } = require('../data/PLD');
+const mustache = require('mustache');
 
-const docArray = Object.keys(doc).map(key => [ key, doc[key] ]);
-const docTable = table([ ["", ""], ...docArray ]);
-const revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => [ date, version, authors.join(), sections.join(), comments ]);
-const revisionsTable = table([ ["", ""], ...revisionsArray ]);
+module.exports = async filename => {
+	const settingsPath = path.isAbsolute(filename) ? filename : path.resolve(filename);
+	const { revisions, prebuild: prebuildPath, template: templatePath, metadata } = require(settingsPath);
+	const documentFolder = path.dirname(settingsPath);
+	const prebuild = prebuildPath ? require(`${documentFolder}/${prebuildPath}`) : () => {};
 
-const content = `
-# ${doc.title}
-###### Teksploit {#identifier .class .class key=value key=value}
+	const metadataArray = Object.keys(metadata).map(key => [ key, metadata[key] ]);
+	const metadataTable = table([ ["", ""], ...metadataArray ]);
+	const revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => [ date, version, authors.join(), sections.join(), comments ]);
+	const revisionsTable = table([ ["", ""], ...revisionsArray ]);
 
-## Description du document
-${docTable}
+	const parsedSettingsPath = path.parse(settingsPath);
 
-${docTable}
+	mustache.escape = text => text;
+	metadata.folder = documentFolder;
+	const template = fs.readFileSync(templatePath ? ('./data/' + templatePath) : (parsedSettingsPath.dir + '/' + parsedSettingsPath.name + '.md')).toString();
+	const content = mustache.render(template, {
+		metadata,
+		data: (await prebuild(metadata, revisions)),
+		tables: {
+			metadata: metadataTable,
+			revisions: revisionsTable,
+		}
+	}).trim() + '\n';
 
-${docTable}
-
-${docTable}
-
-${docTable}
-
-[tek](#identifier)
-[pld](#pld)
-
-## Tableau de révisions
-${revisionsTable}
-`.slice(1);
-
-mkdirp('./build');
-fs.writeFile('./build/title_and_information.md', content);
+	mkdirp('./build');
+	fs.writeFileSync('./build/prebuild.md', content);
+};
