@@ -21,7 +21,7 @@ function loadSettings(parsedPath) {
 	}
 }
 
-module.exports = async filename => {
+module.exports = async (filename, outputName) => {
 	const settingsPath = path.isAbsolute(filename) ? filename : path.resolve(filename);
 	const parsedSettingsPath = path.parse(settingsPath);
 	const { revisions, prebuild: prebuildPath, template: templatePath, metadata } = loadSettings(parsedSettingsPath);
@@ -36,17 +36,23 @@ module.exports = async filename => {
 	mustache.escape = text => text;
 	metadata.folder = documentFolder;
 	const template = fs.readFileSync(templatePath ? ('./data/' + templatePath) : (parsedSettingsPath.dir + '/' + parsedSettingsPath.name + '.md')).toString();
-	const content = mustache.render(template, {
+	const view = {
 		metadata,
 		data: (await prebuild(metadata, revisions)),
 		tables: {
 			metadata: metadataTable,
 			revisions: revisionsTable,
 		}
-	}).trim() + '\n';
+	};
+	const content = mustache.render(template, view).trim() + '\n';
 
 	mkdirp('./build');
 	fs.writeFileSync('./build/prebuild.md', content);
+	view.tables = {
+		metadata: metadataArray,
+		revisions: revisionsArray,
+	}
+	fs.writeFileSync(`./build/${outputName}.json`, JSON.stringify(view, null, 2));
 
 	return documentFolder;
 };
