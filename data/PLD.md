@@ -31,7 +31,7 @@
 		{{#.}}
 			<td>{{story}}</td>
 		{{/.}}
-		<tr>
+		</tr>
 	{{/rows}}
 	</tbody>
 </table>
