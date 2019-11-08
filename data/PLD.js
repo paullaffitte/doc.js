@@ -76,7 +76,7 @@ module.exports = async (metadata, revisions) => {
 	}))).filter(Boolean);
 
 	return {
-		advancement_reports: fs.readFileSync(`${folder}/advancement_reports.md`),
+		advancement_reports: fs.readFileSync(`${folder}/advancement_reports.md`).toString(),
 		date: new Date(),
 		cards,
 	};
