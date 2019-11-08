@@ -35,15 +35,16 @@ if (!commander.format)
 const filename = commander.args[0];
 const documentName = path.parse(filename).name;
 
-prebuild(filename).then(() => {
+prebuild(filename).then(documentFolder => {
 	if (commander.format == 'md') {
 		buildMarkdown(documentName);
 	} else {
 		execa('pandoc', [
 			'build/prebuild.md',
 			'-o', `./build/${documentName}.${commander.format}`,
-			'--from', 'markdown+auto_identifiers+header_attributes',
-			'-t', 'html5'
+			'--from', 'markdown-markdown_in_html_blocks+raw_html+auto_identifiers+header_attributes',
+			'-t', 'html5',
+			'--css', `${documentFolder}/${documentName}.css`,
 		])
 		.then(() => fs.unlink('build/prebuild.md'))
 		.catch(err => {
