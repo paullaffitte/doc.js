@@ -9,7 +9,7 @@
 
 ## Organigramme des livrables
 {{#data.deliverables}}
-### {{name}}
+### {{index}} {{name}}
 {{/data.deliverables}}
 
 ## Cartes des livrables
@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 		{{#headCells}}
-			<th>{{name}}</th>
+			<th>{{index}} {{name}}</th>
 		{{/headCells}}
 		</tr>
 	</thead>
@@ -29,7 +29,7 @@
 	{{#rows}}
 		<tr>
 		{{#.}}
-			<td>{{story}}</td>
+			<td>{{#story}} {{categoryIndex}}.{{index}} {{title}} {{/story}}</td>
 		{{/.}}
 		</tr>
 	{{/rows}}
@@ -39,14 +39,13 @@
 
 ## Stories
 {{#data.deliverables}}
-### {{name}}
+### {{index}} {{name}}
 	{{#categories}}
-#### {{name}}
 		{{#stories}}
 <table class="{{status}}">
 	<thead>
 		<tr>
-			<th colspan="2">{{title}}</th>
+			<th colspan="2">{{categoryIndex}}.{{index}} {{title}}</th>
 		</tr>
 	</thead>
 	<tbody>

@@ -90,7 +90,7 @@ module.exports = async (metadata, revisions) => {
 	categories.forEach(category => deliverables[category.deliverable][category.name] = []);
 	deliverables.list = Object.keys(deliverables).sort();
 	deliverables.list.forEach(deliverable => deliverables[deliverable].categories = Object.keys(deliverables[deliverable]).sort());
-	stories.forEach(card => deliverables[card.deliverable][card.category].push(card));
+	stories.forEach(story => deliverables[story.deliverable][story.category].push(story));
 
 	deliverables = deliverables.list.map((deliverable, i) => {
 		return {
@@ -100,22 +100,21 @@ module.exports = async (metadata, revisions) => {
 				return {
 					name: category,
 					index: i + 1,
-					stories: deliverables[deliverable][category].sort().map((story, i) => ({ ...story, index: i + 1 }))
+					stories: deliverables[deliverable][category].sort().map((story, idx) => ({ ...story, index: idx + 1, categoryIndex: i + 1 }))
 				};
 			})
 		};
 	});
 
 	const deliverableCards = deliverables.map(({ name, index, categories }) => {
-		const rows = [];
-		for (let i = 1; rows.length == 0 || rows[rows.length - 1].filter(({ story }) => story).length; i++) {
+		let rows = [];
+		for (let i = 0; rows.length == 0 || rows[rows.length - 1].filter(({ story }) => story).length; i++) {
 			rows.push(categories.map(({ name, index, stories }) => ({
 				index,
-				story: (stories[stories.length - i] || {}).title
+				story: stories[i]
 			})));
 		}
 		rows.pop();
-		rows.reverse();
 
 		return {
 			name,
