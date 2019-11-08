@@ -33,7 +33,6 @@ module.exports = async filename => {
 	const revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => [ date, version, authors ? authors.join() : '', sections ? sections.join() : '', comments ]);
 	const revisionsTable = table([ ["", ""], ...revisionsArray ]);
 
-
 	mustache.escape = text => text;
 	metadata.folder = documentFolder;
 	const template = fs.readFileSync(templatePath ? ('./data/' + templatePath) : (parsedSettingsPath.dir + '/' + parsedSettingsPath.name + '.md')).toString();
@@ -48,4 +47,6 @@ module.exports = async filename => {
 
 	mkdirp('./build');
 	fs.writeFileSync('./build/prebuild.md', content);
+
+	return documentFolder;
 };

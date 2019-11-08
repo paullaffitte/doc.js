@@ -1,0 +1,26 @@
+h2 {
+  page-break-before: always;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1em;
+  page-break-inside: avoid;
+}
+
+table.todo {
+	background-color: red;
+}
+
+table.doing {
+	background-color: orange;
+}
+
+table.done {
+	background-color: green;
+}
+
+th, td {
+  border: 1px solid black;
+}
