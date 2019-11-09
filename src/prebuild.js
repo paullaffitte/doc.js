@@ -21,10 +21,22 @@ function loadSettings(parsedPath) {
 	}
 }
 
+function loadTemplate(filename) {
+	if (!fs.existsSync(filename))
+		return '';
+
+	return fs.readFileSync(filename).toString();
+}
+
+function renderTemplate(filename, view) {
+	const template = loadTemplate(filename);
+	return mustache.render(template, view).trim();
+}
+
 module.exports = async (filename, outputName) => {
 	const settingsPath = path.isAbsolute(filename) ? filename : path.resolve(filename);
 	const parsedSettingsPath = path.parse(settingsPath);
-	const { revisions, prebuild: prebuildPath, template: templatePath, metadata } = loadSettings(parsedSettingsPath);
+	const { revisions, prebuild: prebuildPath, metadata, pdf } = loadSettings(parsedSettingsPath);
 	const documentFolder = path.dirname(settingsPath);
 	const prebuild = prebuildPath ? require(`${documentFolder}/${prebuildPath}`) : () => {};
 
@@ -35,7 +47,7 @@ module.exports = async (filename, outputName) => {
 
 	mustache.escape = text => text;
 	metadata.folder = documentFolder;
-	const template = fs.readFileSync(templatePath ? ('./data/' + templatePath) : (parsedSettingsPath.dir + '/' + parsedSettingsPath.name + '.md')).toString();
+
 	const view = {
 		metadata,
 		data: (await prebuild(metadata, revisions)),
@@ -44,7 +56,10 @@ module.exports = async (filename, outputName) => {
 			revisions: revisionsTable,
 		}
 	};
-	const content = mustache.render(template, view).trim() + '\n';
+
+	const content = renderTemplate(parsedSettingsPath.dir + '/' + parsedSettingsPath.name + '.md', view);
+	const header = renderTemplate(parsedSettingsPath.dir + '/header.md', view);
+	const footer = renderTemplate(parsedSettingsPath.dir + '/footer.md', view);
 
 	mkdirp('./build');
 	fs.writeFileSync('./build/prebuild.md', content);
@@ -54,5 +69,10 @@ module.exports = async (filename, outputName) => {
 	};
 	fs.writeFileSync(`./build/${outputName}.json`, JSON.stringify(view, null, '\t'));
 
-	return documentFolder;
+	return {
+		...pdf,
+		documentFolder,
+		header,
+		footer,
+	};
 };
