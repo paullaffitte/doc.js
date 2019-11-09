@@ -51,7 +51,7 @@ module.exports = async (filename, outputName) => {
 	view.tables = {
 		metadata: metadataArray,
 		revisions: revisionsArray,
-	}
+	};
 	fs.writeFileSync(`./build/${outputName}.json`, JSON.stringify(view, null, '\t'));
 
 	return documentFolder;
