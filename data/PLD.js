@@ -124,9 +124,15 @@ module.exports = async (metadata, revisions) => {
 		}
 	});
 
+	const date = new Date();
+	const months = [ 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre' ];
+	const timezoneOffset = -Math.floor(date.getTimezoneOffset() / 60);
+
 	return {
 		advancement_reports: fs.readFileSync(`${folder}/advancement_reports.md`).toString(),
-		date: new Date(),
+		date: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`,
+		time: `${date.getHours()}h${date.getMinutes()} (GMT${timezoneOffset >= 0 ? ('+' + timezoneOffset) : timezoneOffset})`,
+		currentYear: date.getFullYear(),
 		deliverables,
 		deliverableCards
 	};

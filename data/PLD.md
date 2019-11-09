@@ -1,3 +1,7 @@
+<header>
+	Teksploit
+</header>
+
 # {{metadata.title}}
 ###### {{metadata.company}}
 
@@ -8,9 +12,14 @@
 {{tables.revisions}}
 
 ## Organigramme des livrables
-{{#data.deliverables}}
-### {{index}} {{name}}
-{{/data.deliverables}}
+
+```{.mermaid format=svg}
+graph TD
+	A[{{metadata.company}}]
+	{{#data.deliverables}}
+	A --- {{name}}[{{index}} {{name}}]
+	{{/data.deliverables}}
+```
 
 ## Cartes des livrables
 {{#data.deliverableCards}}
@@ -73,4 +82,8 @@
 ## Rapports d'avancement
 {{data.advancement_reports}}
 
-Généré le: {{data.date}}
+<footer>
+	Teksploit / 2018-{{data.currentYear}} / Promotion 2021
+</footer>
+
+Généré le: {{data.date}} à {{data.time}}

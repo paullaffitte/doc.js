@@ -24,3 +24,18 @@ table.done {
 th, td {
   border: 1px solid black;
 }
+
+@page {
+	margin: 0.8in 1in 0.8in 1in;
+}
+
+@media print {
+  footer {
+    position: fixed;
+    bottom: 0;
+  }
+  header {
+    position: fixed;
+    top: 0;
+  }
+}
