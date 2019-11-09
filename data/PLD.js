@@ -13,6 +13,8 @@ On ne devrai jamais sous estimer ceci.
 
 - [x] Devenir quelqu'un d'important
 - [ ] Faire quelque chose
+
+Le contenu en dessous des DoD sera ignoré par le PLD.
 */
 
 module.exports = async (metadata, revisions) => {

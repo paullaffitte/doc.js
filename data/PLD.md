@@ -1,7 +1,3 @@
-<header>
-	Teksploit
-</header>
-
 # {{metadata.title}}
 ###### {{metadata.company}}
 
@@ -81,9 +77,5 @@ graph TD
 
 ## Rapports d'avancement
 {{data.advancement_reports}}
-
-<footer>
-	Teksploit / 2018-{{data.currentYear}} / Promotion 2021
-</footer>
 
 Généré le: {{data.date}} à {{data.time}}

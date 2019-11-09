@@ -1,12 +1,12 @@
 h2 {
-  page-break-before: always;
+	page-break-before: always;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 1em;
-  page-break-inside: avoid;
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 1em;
+	page-break-inside: avoid;
 }
 
 table.todo {
@@ -21,21 +21,23 @@ table.done {
 	background-color: green;
 }
 
+table .even {
+	filter: brightness(0.9);
+}
+
 th, td {
   border: 1px solid black;
 }
 
-@page {
-	margin: 0.8in 1in 0.8in 1in;
+header, footer {
+	width: 100%;
+	background-color: red;
 }
 
-@media print {
-  footer {
-    position: fixed;
-    bottom: 0;
-  }
-  header {
-    position: fixed;
-    top: 0;
-  }
+header img {
+	height: 0.5in;
+}
+
+header div {
+	display: inline-block;
 }
