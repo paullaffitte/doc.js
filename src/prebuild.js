@@ -28,9 +28,9 @@ module.exports = async (filename, outputName) => {
 	const documentFolder = path.dirname(settingsPath);
 	const prebuild = prebuildPath ? require(`${documentFolder}/${prebuildPath}`) : () => {};
 
-	const metadataArray = Object.keys(metadata).map(key => [ key, metadata[key] ]);
+	const metadataArray = Object.keys(metadata).map(key => [ key, Array.isArray(metadata[key]) ? metadata[key].join(', ') : metadata[key] ]);
 	const metadataTable = table([ ["", ""], ...metadataArray ]);
-	const revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => [ date, version, authors ? authors.join() : '', sections ? sections.join() : '', comments ]);
+	const revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => [ date, version, authors ? authors.join(', ') : '', sections ? sections.join(', ') : '', comments ]);
 	const revisionsTable = table([ ["", ""], ...revisionsArray ]);
 
 	mustache.escape = text => text;
