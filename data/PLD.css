@@ -41,3 +41,7 @@ header img {
 header div {
 	display: inline-block;
 }
+
+.story-livrable {
+	page-break-before: always;
+}

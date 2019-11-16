@@ -101,7 +101,7 @@ module.exports = async (metadata, revisions) => {
 				return {
 					name: category,
 					index: i + 1,
-					stories: deliverables[deliverable][category].sort().map((story, idx) => ({ ...story, index: idx + 1, categoryIndex: i + 1 }))
+					stories: deliverables[deliverable][category].sort().map((story, i) => ({ ...story, index: i + 1 }))
 				};
 			})
 		};

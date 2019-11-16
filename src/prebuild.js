@@ -4,7 +4,7 @@ const table = require('markdown-table');
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp').sync;
-const mustache = require('mustache');
+const handlebars = require('handlebars');
 const yaml = require('yaml-js');
 
 function loadSettings(parsedPath) {
@@ -30,7 +30,7 @@ function loadTemplate(filename) {
 
 function renderTemplate(filename, view) {
 	const template = loadTemplate(filename);
-	return mustache.render(template, view).trim();
+	return handlebars.compile(template)(view).trim();
 }
 
 module.exports = async (filename, outputName) => {
@@ -45,7 +45,6 @@ module.exports = async (filename, outputName) => {
 	const revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => [ date, version, authors ? authors.join(', ') : '', sections ? sections.join(', ') : '', comments ]);
 	const revisionsTable = table([ ["", ""], ...revisionsArray ]);
 
-	mustache.escape = text => text;
 	metadata.folder = documentFolder;
 
 	const view = {

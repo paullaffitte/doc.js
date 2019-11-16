@@ -4,8 +4,29 @@
 ## Description du document
 {{tables.metadata}}
 
-## Tableau de révisions
+## Tableau de révisions {#tdr}
 {{tables.revisions}}
+
+## Table des matières {#toc}
+- [Description du document](#description-du-document)
+- [Tableau de révisions](#tdr)
+- [Table des matières](#toc)
+- [Organigramme des livrables](#organigramme-des-livrables)
+- [Cartes des livrables](#cartes-des-livrables)
+{{#data.deliverableCards}}
+	- [{{name}}](#carte-livrable-{{index}})
+{{/data.deliverableCards}}
+- [Stories](#stories)
+{{#data.deliverables}}
+	- [{{index}} {{name}}](#story-livrable-{{index}})
+	{{#categories}}
+		- {{index}} {{name}}
+		{{#stories}}
+			- [{{index}} {{title}}](#story-{{../../index}}.{{../index}}.{{index}})
+		{{/stories}}
+	{{/categories}}
+{{/data.deliverables}}
+- [Rapports d'avancement](#rapports-davancement)
 
 ## Organigramme des livrables
 
@@ -13,13 +34,13 @@
 graph TD
 	A[{{metadata.company}}]
 	{{#data.deliverables}}
-	A --- {{name}}[{{index}} {{name}}]
+	A --- {{index}}[{{index}} {{name}}]
 	{{/data.deliverables}}
 ```
 
 ## Cartes des livrables
 {{#data.deliverableCards}}
-<table>
+<table id="carte-livrable-{{index}}">
 	<thead>
 		<tr>
 			<th colspan="{{headCells.length}}">{{name}}</th>
@@ -34,7 +55,7 @@ graph TD
 	{{#rows}}
 		<tr>
 		{{#.}}
-			<td>{{#story}} {{categoryIndex}}.{{index}} {{title}} {{/story}}</td>
+			<td>{{#story}} {{../index}}.{{index}} {{title}} {{/story}}</td>
 		{{/.}}
 		</tr>
 	{{/rows}}
@@ -44,13 +65,14 @@ graph TD
 
 ## Stories
 {{#data.deliverables}}
-### {{index}} {{name}}
+
+### {{index}} {{name}} { #story-livrable-{{index}} .story-livrable }
 	{{#categories}}
 		{{#stories}}
 <table class="{{status}}">
 	<thead>
 		<tr>
-			<th colspan="2">{{categoryIndex}}.{{index}} {{title}}</th>
+			<th colspan="2" id="story-{{../../index}}.{{../index}}.{{index}}">{{../index}}.{{index}} {{title}}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -85,5 +107,3 @@ graph TD
 
 ## Rapports d'avancement
 {{data.advancement_reports}}
-
-Généré le: {{data.date}} à {{data.time}}
