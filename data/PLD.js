@@ -40,19 +40,25 @@ module.exports = async (metadata, revisions) => {
 	const stories = (await Promise.all(issues.map(async ({ title, description, time_stats, project_id, labels, closed_at }) => {
 		const timeEstimate = time_stats.time_estimate / (8 * 3600);
 
-		if (!description || description.length == 0)
+		if (!description || description.length == 0) {
+			console.warn(`Issue "${title}" is missing a description.`);
 			return;
+		}
 
 		description = description.split('\n');
 
-		if (description.length < 3)
+		if (description.length < 3) {
+			console.warn(`Issue "${title}" is not parsable.`);
 			return;
+		}
 
 		const [ category, deliverable ] = description.shift().split(' - ').reverse();
 		const [ story, user, goal ] = description.shift().match(/En tant que ([^,]*), je veux (.*)/) || [];
 
-		if (!user || !goal)
+		if (!user || !goal) {
+			console.warn(`Issue "${title}" is not parsable.`);
 			return;
+		}
 
 		description = description.join('\n');
 		const dod = description.match(/- \[[x| ]\] ([^\n]*)/g).map(s => ({ definition: s.slice(6), done: s.slice(3, 4) == 'x' }));
