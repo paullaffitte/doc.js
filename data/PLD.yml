@@ -1,23 +1,23 @@
 metadata:
-  title: PLD
-  company: Teksploit
-  object: Objectifs du premier sprint de 3 mois
-  authors:
+  titre: PLD
+  groupe: Teksploit
+  objet: Avancement du projet Teksploit
+  auteurs:
     - Pierre Pinet
     - Paul Laffitte
-  responsible: Jean Noriot
+  responsable: Jean Noriot
   emails:
     - pierre.pinet@epitech.eu
     - paul.laffitte@epitech.eu
     - eip@epitech.eu
-  keywords:
+  mots-clés:
     - logs
     - stories
     - livrables
     - évolution
   promotion: 2021
-  updated: 14/07/2019
-  version: '2.1.0'
+  date de mise à jour: 14/07/2019
+  version: '3.0.0'
 
 prebuild: PLD.js
 revisions:
@@ -26,19 +26,75 @@ revisions:
     authors:
       - Pierre Pinet
       - Paul Laffitte
-    sections: [ Toutes ]
+    sections: [ toutes ]
     comments: Premier jet
   - date: 09/04/2019
     version: '1.1.0'
+    authors:
+      - Paul Laffitte
+    sections: [ stories ]
+    comments: Création des cartes
   - date: 11/04/2019
     version: '1.1.1'
+    authors:
+      - Arthur Chaloin
+    sections: [ description ]
+    comments: Ajout de l’objet et des mots clés
   - date: 12/04/2019
     version: '1.1.2'
-  - version: '1.2.0'
-  - version: '1.3.0'
-  - version: '1.3.1'
-  - version: '2.0.0'
-  - version: '2.0.1'
+    authors:
+      - Paul Laffitte
+    sections: [ rapports, sommaire ]
+    comments: Corrections suites aux conseils de Flavien
+  - date: 27/05/2019
+    version: '1.2.0'
+    authors:
+      - Pierre Pinet
+    sections: [ rapports ]
+    comments: Ajout d’un rapport pour le follow-up du premier sprint
+  - date: 17/06/2019
+    version: '1.3.0'
+    authors:
+      - Paul Laffitte
+    sections: [ stories, rapports ]
+    comments: Ajout d’un rapport pour le delivery du premier sprint + stories du backoffice
+  - date: 19/06/2019
+    version: '1.3.1'
+    authors:
+      - Pierre Pinet
+      - Paul Laffitte
+    sections: [ rapports ]
+    comments: Mise à jours des réalisations
+  - date: 13/07/2019
+    version: '2.0.0'
+    authors:
+      - Paul Laffitte
+    sections: [ toutes sauf rapports ]
+    comments: Mise en place des stories pour le 2e kick-off
+  - date: 14/07/2019
+    version: '2.0.1'
+    authors:
+      - Toute l'équipe Teksploit
+    sections: [ stories ]
+    comments: Ajout des DoD & estimations de charge
+  - date: 21/09/2019
+    version: '2.1.0'
+    authors:
+      - Paul Laffitte
+    sections: [ rapports ]
+    comments: Ajout d’un rapport pour le follow-up du second sprint
+  - date: 14/10/2019
+    version: '2.2.0'
+    authors:
+      - Paul Laffitte
+    sections: [ rapports ]
+    comments: Ajout d’un rapport pour le delivery du second sprint
+  - date: 14/10/2019
+    version: '3.0.0'
+    authors:
+      - Paul Laffitte
+    sections: [ stories, rapports ]
+    comments: Mise en place des stories et du rapport d'avancement pour le 3e kick-off
 
 pdf:
   margin:

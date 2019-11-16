@@ -33,6 +33,10 @@ th, td {
   border: 1px solid black;
 }
 
+th:first-letter, td:first-letter {
+  text-transform: uppercase;
+}
+
 header, footer {
 	width: 100%;
 	background-color: red;

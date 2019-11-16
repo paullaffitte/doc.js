@@ -1,5 +1,5 @@
-# {{metadata.title}}
-###### {{metadata.company}}
+# {{metadata.titre}}
+###### {{metadata.groupe}}
 
 ## Description du document
 {{tables.metadata}}
@@ -32,7 +32,7 @@
 
 ```{.mermaid format=svg}
 graph TD
-	A[{{metadata.company}}]
+	A[{{metadata.groupe}}]
 	{{#data.deliverables}}
 	A --- {{index}}[{{index}} {{name}}]
 	{{/data.deliverables}}
