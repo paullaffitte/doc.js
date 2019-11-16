@@ -66,6 +66,14 @@ graph TD
 			<td colspan="2">{{description}}</td>
 		</tr>
 		<tr>
+			<td colspan="2">
+				Definition of done :<br>
+				{{#dod}}
+					<label><input type="checkbox" {{#done}}checked{{/done}}>{{definition}}</label><br>
+				{{/dod}}
+			</td>
+		</tr>
+		<tr>
 			<td>Charge estimée</td>
 			<td>{{timeEstimate}} J/H</td>
 		</tr>

@@ -55,8 +55,7 @@ module.exports = async (metadata, revisions) => {
 			return;
 
 		description = description.join('\n');
-		const dod = description.match(/- \[[x| ]\] ([^\n]*)/g).map(s => s.slice(6));
-		dod.shift();
+		const dod = description.match(/- \[[x| ]\] ([^\n]*)/g).map(s => ({ definition: s.slice(6), done: s.slice(3, 4) == 'x' }));
 		description = description.match(/([\s\S]*?)- \[[x| ]\]/).pop().trim().replace('\n', '<br>');
 
 		if (!deliverable && !projectNamesByIds[project_id])
@@ -66,7 +65,7 @@ module.exports = async (metadata, revisions) => {
 			title,
 			description,
 			deliverable: deliverable || projectNamesByIds[project_id],
-			category,
+			category: category.replace(/\\$/, ''),
 			userStory: {
 				user,
 				goal,
@@ -111,7 +110,7 @@ module.exports = async (metadata, revisions) => {
 	const deliverableCards = deliverables.map(({ name, index, categories }) => {
 		let rows = [];
 		for (let i = 0; rows.length == 0 || rows[rows.length - 1].filter(({ story }) => story).length; i++) {
-			rows.push(categories.map(({ name, index, stories }) => ({
+			rows.push(categories.map(({ index, stories }) => ({
 				index,
 				story: stories[i]
 			})));
