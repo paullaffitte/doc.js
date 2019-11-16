@@ -106,4 +106,6 @@ graph TD
 {{/data.deliverables}}
 
 ## Rapports d'avancement
+<div class="rapports-davancement">
 {{data.advancement_reports}}
+</div>

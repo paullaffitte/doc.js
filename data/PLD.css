@@ -1,3 +1,7 @@
+body {
+	font-family: Arial;
+}
+
 h2 {
 	page-break-before: always;
 }
@@ -45,3 +49,12 @@ header div {
 .story-livrable {
 	page-break-before: always;
 }
+
+@media print {
+	.rapports-davancement hr {
+		margin: 0;
+		border: 0;
+		page-break-after: always;
+	}
+}
+
