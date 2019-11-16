@@ -1,3 +1,13 @@
+### 16/11/2019 - Rapport d’avancement pour le Kick-Off du troisième sprint
+
+Pour ce début de troisième sprint, nous avons recruté un nouveau membre dans notre équipe afin de nous aider à continuer d'avancer dans le projet. Afin de correctement l'intégrer dans notre groupe, nous avons décidé d'attendre le prochain sprint avant de recruter une nouvelle personne.
+
+Dans le but de faciliter la création du PLD ainsi que la mise en relation de son contenu et de nos issues présentes sur GitLab, nous avons décidé de le générer directement depuis l'api de GitLab. Cela nous permet de passer moins de temps à maintenir et mettre à jour notre PLD ainsi qu'à le rendre plus qualitatif car plus proche de nos issues. Cela nous aide également à avoir des issues bien construites puisqu'elle respectent maintenant la structure des cartes du PLD, en comprenant une story ainsi que des définitions of done. Le PLD comporte désormais un code couleur pour les cartes (rouge : "à faire", orange : "en cours" et vert : "fait"), ainsi que des définitions of done avec des cases cochées ou non en fonction de leur état d'avancement. Toutes les informations nécéssaires y sont présentes et seule la mise en page à l'aide de CSS reste à faire.
+
+Le but principal de ce sprint sera de remettre notre projet sur la bonne voie, après un second sprint légèrement chaotique du au départ de deux de nos membres. L'un de nos objectifs le plus critique sera de mettre en place une nouvelle version du serveur écrite en C# afin d'avoir de nouveau une pleine maîtrise de celui-ci, en effet les deux personnes responsables de celui-ci étant les mêmes personnes ayant quitté notre équipe. Le nouveau serveur en C# nous permettra également d’utiliser des structures de données communes entre le client et le serveur, ce qui devrai faciliter le développement.
+
+---
+
 ### 14/10/2019 - Rapport d’avancement pour le Delivery du second sprint
 
 Après un début difficile sur le second sprint, nous avons organisé plusieurs réunions afin de discuter de l’avenir du groupe. À l’unanimité, les membres encore présents ont exprimé leur souhait de poursuivre le projet malgré les difficultés que cela pouvait représenter. Un début de réorganisation s’est opéré, des postes plus polyvalents sont considérés et Paul Laffitte prend en charge la responsabilité de chef de groupe.
