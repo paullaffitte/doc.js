@@ -4,17 +4,45 @@
 ## {{metadata.groupe}} {#sub-title}
 
 ## Description du document
-{{tables.metadata}}
+<table id="metadata">
+	<tbody>
+	{{#each metadata}}
+		<tr class="{{even_odd @index 0}} {{@key}}">
+			<td class="key">{{@key}}</td>
+			<td>{{this}}</td>
+		</tr>
+	{{/each}}
+	</tbody>
+</table>
 
 ## Tableau de révisions {#tdr}
-{{tables.revisions}}
+<table id="revisions">
+	<thead>
+		<tr class="key">
+			<th>Date</th>
+			<th>Version</th>
+			<th>Auteurs</th>
+			<th>Sections</th>
+			<th>Commentaires</th>
+		</tr>
+	</thead>
+	<tbody>
+	{{#each revisions}}
+		<tr class="{{even_odd @index 0}}">
+		{{#each this}}
+			<td class="{{@key}}">{{this}}</td>
+		{{/each}}
+		</tr>
+	{{/each}}
+	</tbody>
+</table>
 
 ## Table des matières {#toc}
 - [Description du document](#description-du-document)
 - [Tableau de révisions](#tdr)
-- [Table des matières](#toc)
-- [Organigramme des livrables](#organigramme-des-livrables)
-- [Cartes des livrables](#cartes-des-livrables)
+- [1. Table des matières](#toc)
+- [2. Organigramme des livrables](#organigramme-des-livrables)
+- [3. Cartes des livrables](#cartes-des-livrables)
 {{#data.deliverableCards}}
 	- [{{name}}](#carte-livrable-{{index}})
 {{/data.deliverableCards}}
@@ -28,9 +56,9 @@
 		{{/stories}}
 	{{/categories}}
 {{/data.deliverables}}
-- [Rapports d'avancement](#rapports-davancement)
+- [4. Rapports d'avancement](#rapports-davancement)
 
-## Organigramme des livrables
+## 1. Organigramme des livrables
 
 ```{.mermaid format=svg}
 graph TD
@@ -40,14 +68,14 @@ graph TD
 	{{/data.deliverables}}
 ```
 
-## Cartes des livrables
+## 2. Cartes des livrables
 {{#data.deliverableCards}}
-<table id="carte-livrable-{{index}}">
+<table id="carte-livrable-{{index}}" class="carte-livrable">
 	<thead>
-		<tr>
+		<tr class="key">
 			<th colspan="{{headCells.length}}">{{name}}</th>
 		</tr>
-		<tr>
+		<tr class="even">
 		{{#headCells}}
 			<th>{{index}} {{name}}</th>
 		{{/headCells}}
@@ -55,7 +83,7 @@ graph TD
 	</thead>
 	<tbody>
 	{{#rows}}
-		<tr>
+		<tr class="{{even_odd @index 1}}">
 		{{#.}}
 			<td>{{#story}} {{../index}}.{{index}} {{title}} {{/story}}</td>
 		{{/.}}
@@ -65,40 +93,43 @@ graph TD
 </table>
 {{/data.deliverableCards}}
 
-## Stories
+## 3. Stories
 {{#data.deliverables}}
 
-### {{index}} {{name}} { #story-livrable-{{index}} .story-livrable }
+### {{index}}. {{name}} { #story-livrable-{{index}} .story-livrable }
 	{{#categories}}
 		{{#stories}}
-<table class="{{status}}">
+<table class="story-card {{status}}">
 	<thead>
-		<tr>
+		<tr class="key">
 			<th colspan="2" id="story-{{../../index}}.{{../index}}.{{index}}">{{../index}}.{{index}} {{title}}</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>En tant que :</td>
-			<td>Je veux :</td>
+		<tr class="even">
+			<td class="bold">En tant que :</td>
+			<td class="bold">Je veux :</td>
 		</tr>
-		<tr>
+		<tr class="odd">
 			<td>{{userStory.user}}</td>
 			<td>{{userStory.goal}}</td>
 		</tr>
-		<tr>
-			<td colspan="2">{{description}}</td>
-		</tr>
-		<tr>
+		<tr class="even">
 			<td colspan="2">
-				Definition of done :<br>
+				<span class="bold">Description :</span><br>
+				{{description}}
+			</td>
+		</tr>
+		<tr class="odd">
+			<td colspan="2">
+				<span class="bold">Definition of done :</span><br>
 				{{#dod}}
 					<label><input type="checkbox" {{#done}}checked{{/done}}>{{definition}}</label><br>
 				{{/dod}}
 			</td>
 		</tr>
-		<tr>
-			<td>Charge estimée</td>
+		<tr class="even">
+			<td class="bold">Charge estimée</td>
 			<td>{{timeEstimate}} J/H</td>
 		</tr>
 	</tbody>
@@ -107,7 +138,7 @@ graph TD
 	{{/categories}}
 {{/data.deliverables}}
 
-## Rapports d'avancement
+## 4. Rapports d'avancement
 <div class="rapports-davancement">
 {{data.advancement_reports}}
 </div>

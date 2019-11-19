@@ -11,7 +11,6 @@ body {
 
 #title, #sub-title {
 	text-align: center;
-	font-weight: normal;
 }
 
 #title {
@@ -24,8 +23,18 @@ body {
 	color: #666666;
 }
 
+h1, h2, h3 {
+	font-weight: normal;
+}
+
 h2 {
 	page-break-before: always;
+	font-size: 20pt;
+}
+
+h3, #description-du-document, #tdr {
+	font-size: 14pt;
+	color: #434343;
 }
 
 table {
@@ -36,27 +45,69 @@ table {
 }
 
 table.todo {
-	background-color: red;
+	filter: saturate(1.8) hue-rotate(150deg) brightness(0.85) contrast(1.4);
 }
 
 table.doing {
-	background-color: orange;
+	filter: saturate(1.8) hue-rotate(180deg) brightness(1.1);
 }
 
 table.done {
-	background-color: green;
+	filter: saturate(1.6) hue-rotate(230deg) brightness(1.1);
 }
 
 table .even {
-	filter: brightness(0.9);
+	background-color: #a4c2f4;
+}
+
+table .odd {
+	background-color: #c9daf8;
+}
+
+table .key {
+	background-color: #6d9eeb;
+	color: white;
+}
+
+table th {
+	font-weight: normal;
 }
 
 th, td {
-  border: 1px solid black;
+ 	border: 1px solid white;
+ 	padding: 0.08in;
+ 	text-align: left;
 }
 
+
 th:first-letter, td:first-letter {
-  text-transform: uppercase;
+	text-transform: uppercase;
+}
+
+#revisions .date, #revisions .version {
+	text-align: center;
+}
+
+#metadata .e-mails td:not(.key):first-letter {
+	text-transform: lowercase;
+}
+
+.carte-livrable thead th {
+	text-align: center;
+	height: 0.5in;
+}
+
+.carte-livrable .key {
+	font-size: 16pt;
+}
+
+.carte-livrable thead .even {
+	color: #434343;
+	font-size: 14pt;
+}
+
+.story-card .key {
+	font-size: 18pt;
 }
 
 header, footer {
@@ -77,7 +128,7 @@ footer {
 	text-align: center;
 }
 
-.story-livrable {
+.story-livrable:not(#story-livrable-1) {
 	page-break-before: always;
 }
 
@@ -86,10 +137,26 @@ footer {
 	margin-top: 0.1in;
 }
 
+.rapports-davancement h3 {
+	text-decoration: underline;
+	font-size: 13pt;
+}
+
+.bold {
+	font-weight: bold;
+}
+
 @media print {
 	.rapports-davancement hr {
 		margin: 0;
 		border: 0;
 		page-break-after: always;
+	}
+}
+
+@media screen {
+	body {
+		max-width: 800px;
+		margin: auto;
 	}
 }

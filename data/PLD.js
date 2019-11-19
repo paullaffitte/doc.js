@@ -2,6 +2,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const { Gitlab } = require('gitlab');
 const config = require('./config');
+const handlebars = require('handlebars');
 
 /*
 ISSUE EXAMPLE:
@@ -17,9 +18,12 @@ On ne devrai jamais sous estimer ceci.
 Le contenu en dessous des DoD sera ignoré par le PLD.
 */
 
-module.exports = async (metadata, revisions) => {
-	const folder = metadata.folder;
+handlebars.registerHelper('even_odd', (conditional, invert) => (conditional % 2) == parseInt(invert) ? 'even' : 'odd');
+Array.prototype.toString = function() {
+	return this.join(', ');
+}
 
+module.exports = async (metadata, revisions, folder) => {
 	const api = new Gitlab({
 		token: process.env.GITLAB_TOKEN,
 	});

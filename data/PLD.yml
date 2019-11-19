@@ -6,7 +6,7 @@ metadata:
     - Pierre Pinet
     - Paul Laffitte
   responsable: Jean Noriot
-  emails:
+  e-mails:
     - pierre.pinet@epitech.eu
     - paul.laffitte@epitech.eu
     - eip@epitech.eu
@@ -100,5 +100,5 @@ pdf:
   margin:
     top: 2in
     bottom: 1in
-    left: 1in
-    right: 1in
+    left: 0.6in
+    right: 0.6in
