@@ -21,7 +21,12 @@ function parseFormat(value) {
 
 async function incorporateImagesAndStyle(html, css, margin) {
 	const matches = html.matchAll(/<img[^>]*? src="([^"]*)"/g);
-  const style = `font-size: 8pt; margin: 0 ${margin.right} 0 ${margin.left};`;
+  const style = `
+font-size: 8pt;
+margin-left: calc(${margin.left} * 0.78);
+margin-right: calc(${margin.right} * 0.78);
+width: 100%;
+height: calc(100% - 0.185in);`;
 
 	for (const match of matches) {
 		const imgTagWithBase64 = match[0].replace(match[1], `data:image/${match[1].split('.').pop()};base64,` + (await image2base64(match[1])));
