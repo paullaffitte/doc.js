@@ -2,6 +2,28 @@ body {
 	font-family: Arial;
 }
 
+#title-logo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 9cm;
+}
+
+#title, #sub-title {
+	text-align: center;
+	font-weight: normal;
+}
+
+#title {
+	font-size: 26pt;
+}
+
+#sub-title {
+	page-break-before: avoid;
+	font-size: 15pt;
+	color: #666666;
+}
+
 h2 {
 	page-break-before: always;
 }
@@ -39,19 +61,29 @@ th:first-letter, td:first-letter {
 
 header, footer {
 	width: 100%;
-	background-color: red;
+	height: calc(100% - 0.25in);
+}
+
+header {
+	margin-top: 0.25in;
 }
 
 header img {
-	height: 0.5in;
+	height: 100%;
+	display: inline-block;
 }
 
-header div {
-	display: inline-block;
+footer {
+	text-align: center;
 }
 
 .story-livrable {
 	page-break-before: always;
+}
+
+.page-stats {
+	text-align: right;
+	margin-top: 0.1in;
 }
 
 @media print {
@@ -61,4 +93,3 @@ header div {
 		page-break-after: always;
 	}
 }
-

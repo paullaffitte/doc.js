@@ -98,7 +98,7 @@ revisions:
 
 pdf:
   margin:
-    top: 1in
+    top: 2in
     bottom: 1in
-    left: 0.8in
-    right: 0.8in
+    left: 1in
+    right: 1in

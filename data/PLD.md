@@ -1,5 +1,7 @@
-# {{metadata.titre}}
-###### {{metadata.groupe}}
+<img id="title-logo" src="../data/Teksploit-logo.png">
+
+# {{metadata.titre}} {#title}
+## {{metadata.groupe}} {#sub-title}
 
 ## Description du document
 {{tables.metadata}}
