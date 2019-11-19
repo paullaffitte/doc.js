@@ -45,11 +45,10 @@ module.exports = async (filename, outputName) => {
 	const revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => [ date, version, authors ? authors.join(', ') : '', sections ? sections.join(', ') : '', comments ]);
 	const revisionsTable = table([ ["", ""], ...revisionsArray ]);
 
-	metadata.folder = documentFolder;
-
 	const view = {
 		metadata,
-		data: (await prebuild(metadata, revisions)),
+		revisions,
+		data: await prebuild(metadata, revisions, documentFolder),
 		tables: {
 			metadata: metadataTable,
 			revisions: revisionsTable,
