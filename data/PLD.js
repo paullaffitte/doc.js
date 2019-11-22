@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const { Gitlab } = require('gitlab');
 const config = require('./config');
 const handlebars = require('handlebars');
+const chalk = require('chalk');
 
 /*
 ISSUE EXAMPLE:
@@ -23,6 +24,49 @@ Array.prototype.toString = function() {
 	return this.join(', ');
 }
 
+const _console = { warn: console.warn, error: console.error }
+console.info = (...args) => console.log(chalk.blue(...args));
+console.warn = (...args) => _console.warn(chalk.yellow(...args));
+console.error = (...args) => _console.error(chalk.red(...args));
+
+function showTimeEstimations(stories) {
+	if (stories.length == 0) {
+		console.warn('There is no story make statistics.');
+		return;
+	}
+
+	const statBase = { estimate: 0, spent: 0, dods: 0, dodsDone: 0 };
+	const assignees = stories.reduce((acc, { assignee }) => ({ ...acc, [assignee]: statBase }), {});
+	const makeTotal = (acc, { timeEstimate, timeSpent, assignee, dod }) => ({
+		estimate: acc.estimate + timeEstimate,
+		spent: acc.spent + timeSpent,
+		dods: acc.dods + dod.length,
+		dodsDone: acc.dodsDone + dod.filter(({ done }) => done).length,
+	});
+	const totalTimeEstimation = stories.reduce((acc, story) => ({
+		...acc,
+		[story.assignee]: makeTotal(acc[story.assignee], story),
+		Total: makeTotal({ ...statBase, ...acc.Total }, story)
+	}), assignees);
+
+	console.info(`${totalTimeEstimation.Total.estimate} jours estimés, soit ${totalTimeEstimation.Total.estimate / config.members} jours par personne.`);
+
+	const percentage = (progression, total) => Math.floor(progression / total * 100) + '%';
+	const assigneeTable = Object.entries(totalTimeEstimation)
+		.map(([ name, {estimate, spent, dods, dodsDone} ]) => ({
+			name,
+			estimate,
+			spent,
+			dods,
+			dodsDone,
+			timeProgression: percentage(spent, estimate),
+			dodsProgression: percentage(dodsDone, dods),
+		}))
+		.sort((a, b) => b.estimate - a.estimate)
+
+	console.table(assigneeTable);
+}
+
 module.exports = async (metadata, revisions, folder) => {
 	const api = new Gitlab({
 		token: process.env.GITLAB_TOKEN,
@@ -41,8 +85,9 @@ module.exports = async (metadata, revisions, folder) => {
 
 	const projectNamesByIds = {};
 	const issues = (await api.Issues.all({ milestone: milestone.title, scope: 'all' }));
-	const stories = (await Promise.all(issues.map(async ({ title, description, time_stats, project_id, labels, closed_at }) => {
+	const stories = (await Promise.all(issues.map(async ({ title, description, time_stats, project_id, labels, closed_at, assignee }) => {
 		const timeEstimate = time_stats.time_estimate / (8 * 3600);
+		const timeSpent = time_stats.total_time_spent / (8 * 3600);
 
 		if (!description || description.length == 0) {
 			console.warn(`Issue "${title}" is missing a description.`);
@@ -82,9 +127,13 @@ module.exports = async (metadata, revisions, folder) => {
 			},
 			dod,
 			timeEstimate,
-			status: labels.includes('Doing') ? 'doing' : (closed_at ? 'done' : 'todo')
+			timeSpent,
+			status: labels.includes('Doing') ? 'doing' : (closed_at ? 'done' : 'todo'),
+			assignee: assignee ? assignee.name : 'Personne'
 		};
 	}))).filter(Boolean);
+
+	showTimeEstimations(stories);
 
 	let deliverables = {};
 	let categories = [];

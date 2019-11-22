@@ -8,6 +8,7 @@
     "clean": "rm -rvf build"
   },
   "dependencies": {
+    "chalk": "^3.0.0",
     "chrome-headless-render-pdf": "^1.8.2",
     "commander": "^4.0.0",
     "execa": "^2.0.3",
