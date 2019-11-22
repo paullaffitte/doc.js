@@ -109,6 +109,10 @@ module.exports = async (metadata, revisions, folder) => {
 			return;
 		}
 
+		if (timeEstimate == 0) {
+			console.warn(`Issue "${title}" has no time estimate.`);
+		}
+
 		description = description.join('\n');
 		const dod = description.match(/- \[[x| ]\] ([^\n]*)/g).map(s => ({ definition: s.slice(6), done: s.slice(3, 4) == 'x' }));
 		description = description.match(/([\s\S]*?)- \[[x| ]\]/).pop().trim().replace('\n', '<br>');
