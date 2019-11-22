@@ -3,3 +3,4 @@ build
 *.pdf
 *.html
 *.log
+mermaid-filter.err
