@@ -89,12 +89,18 @@ revisions:
       - Paul Laffitte
     sections: [ rapports ]
     comments: Ajout d’un rapport pour le delivery du second sprint
-  - date: 14/10/2019
+  - date: 16/11/2019
     version: '3.0.0'
     authors:
       - Paul Laffitte
     sections: [ stories, rapports ]
     comments: Mise en place des stories et du rapport d'avancement pour le 3e kick-off
+  - date: 24/11/2019
+    version: '3.0.1'
+    authors:
+      - Paul Laffitte
+    sections: [ stories ]
+    comments: Ajout d'issues supplémentaires de sorte à atteindre la charge de travail attendue
 
 pdf:
   margin:
