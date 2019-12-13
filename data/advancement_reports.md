@@ -1,3 +1,19 @@
+### 13/12/2019 - Rapport d’avancement pour le Follow-Up du troisième sprint
+
+Lors de ce premier follow-up, nos objectifs étaient principalement d'avoir un nouveau server fonctionnel avec quelques des fonctionnalités déjà présentes sur la version précédente ainsi que de recruter un dernier membre dans notre équipe. Nous avons également du intégrer notre nouveau membre et le guider dans l'accomplissement de ses tâches.
+
+Les réalisations sont :
+
+- Paul :
+	- Stack : Création d’une stack docker-compose pour le développement
+	- Autre : Finitions sur la génération du PLD (design)
+	- Autre : Vectorisation du logo Teksploit
+	- Autre : Écriture du document de description du projet
+	- Autre : Recherche d'un nouveau membre à recruter
+	- Autre : Écriture du rapport d'avancement pour le PLD
+
+---
+
 ### 16/11/2019 - Rapport d’avancement pour le Kick-Off du troisième sprint
 
 Pour ce début de troisième sprint, nous avons recruté un nouveau membre dans notre équipe afin de nous aider à continuer d'avancer dans le projet. Afin de correctement l'intégrer dans notre groupe, nous avons décidé d'attendre le prochain sprint avant de recruter une nouvelle personne.
