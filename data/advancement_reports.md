@@ -14,27 +14,26 @@ Après un début difficile sur le second sprint, nous avons organisé plusieurs 
 
 Les réalisations sont :
 
-- Ethan:
+- Ethan :
 	- Client : Création de préfabs d’UI - **1** J/H
 	- Client : Finitions sur le UI Layout System - **1** J/H
 	- Client : Ajout d’un menu des paramètres - **3** J/H
-- Pierre:
+- Pierre :
 	- Client : Retour visuel lors du loot - **4** J/H
 	- Client : Correction d’un bug faisant disparaître les objets de la map à la fin d’un combat - **1** J/H
-- Paul:
+- Paul :
 	- Client : Réparation de l’éditeur de code - **1** J/H
 	- Admin : Correction des redirections et de l’utilisation des ports - **1** J/H
 	- Admin : Création de sous-domaines spécifiques à l’api et aux comptes - **1** J/H
 	- Autre : Outil de génération de PLD à partir des issues Gitlab (en cours) - **2** J/H
 	- Autre : Réorganisation des issues et des milestones Gitlab - **0.5** J/H
 	- Autre : PLD - **0.5** J/H
-- Guillaume:
-	- Client: Afficher le hall d’entrée de la même façon qu’une autre zone - **3** J/H
-	- Client: Amélioration de l’UX de l’éditeur de zones - **3** J/H
-	- Serveur: Conception du hall d’entrée - **4** J/H
+- Guillaume :
+	- Client : Afficher le hall d’entrée de la même façon qu’une autre zone - **3** J/H
+	- Client : Amélioration de l’UX de l’éditeur de zones - **3** J/H
+	- Serveur : Conception du hall d’entrée - **4** J/H
 
-Un recrutement est prévu dans l’objectif de rééquilibrer les effectifs ainsi que la charge de
-travail.
+Un recrutement est prévu dans l’objectif de rééquilibrer les effectifs ainsi que la charge de travail.
 
 ---
 
@@ -44,25 +43,23 @@ La période s’étalant du Kick-Off au Follow-Up du second sprint s’est avér
 
 Les réalisations sont :
 
-- Arthur:
+- Arthur :
 	- Server : Utilisation des statistiques du joueur dans les combats - **1** J/H
-- Paul:
+- Paul :
 	- Client : Refonte graphique du chat et de l’éditeur de code - **2** J/H
-- Thomas:
+- Thomas :
 	- Server : Début de tests unitaires - **1** J/H
-- Ethan:
+- Ethan :
 	- Client : Déplacement des fenêtres - **1** J/H
 	- Client : Système de layout (bouton / checkbox) - **1** J/H
-- Pierre:
+- Pierre :
 	- Autre : Document de game design - **1** J/H
 
 ---
 
 ### 17/07/2019 - Rapport d’avancement pour le Kick-Off du second sprint
 
-Pour le Kick-Off de notre second sprint, nous avons mis en place de multiples méthodes et
-éléments techniques inspirés de la méthode Scrum pour mieux encadrer les perspectives et
-objectifs de cette période de travail.
+Pour le Kick-Off de notre second sprint, nous avons mis en place de multiples méthodes et éléments techniques inspirés de la méthode Scrum pour mieux encadrer les perspectives et objectifs de cette période de travail.
 
 Ces méthodes et éléments techniques ont été, dans l’ordre chronologique :
 
@@ -118,8 +115,7 @@ Pour cette seconde partie de sprint, nous avons étés plus structurés dans not
 
 ### 24/05/2019 - Rapport d’avancement pour le Follow Up du premier sprint
 
-Lors du follow up de notre premier sprint, nous sommes parvenus à \~35% de complétion des
-tâches.
+Lors du follow up de notre premier sprint, nous sommes parvenus à \~35% de complétion des tâches.
 
 Les réalisations sont :
 
@@ -145,9 +141,7 @@ Les réalisations sont :
 	- Backend : Authentification (en cours de réalisation) - **2** J/H
 	- Backoffice : Assistant d’installation - **1** J/H
 
-Pour la seconde partie de ce sprint, nous comptons être encore plus structurés dans notre
-méthode de travail, et nous allons mettre en place plusieurs sous-sprints de une à deux
-semaines.
+Pour la seconde partie de ce sprint, nous comptons être encore plus structurés dans notre méthode de travail, et nous allons mettre en place plusieurs sous-sprints de une à deux semaines.
 
 ---
 
@@ -159,24 +153,15 @@ Lors de la Forward, nous avons pu créer un prototype permettant à un utilisate
 - De communiquer avec les autres joueurs par le biais d’un chat textuel
 - De faire des donjons
 
-Lors de sa connexion, le joueur arrive sur un salon virtuel, le “Lobby”, où il peut choisir le donjon
-qu’il souhaite faire.
+Lors de sa connexion, le joueur arrive sur un salon virtuel, le “Lobby”, où il peut choisir le donjon qu’il souhaite faire.
 
-Les donjons sont composés de salles comportant chacune un exercice à résoudre par le biais
-d’un éditeur de texte intégré au jeu. Le code du joueur est testé côté serveur et la porte pour la
-salle suivante se déverrouille en cas de réussite de l’exercice.
+Les donjons sont composés de salles comportant chacune un exercice à résoudre par le biais d’un éditeur de texte intégré au jeu. Le code du joueur est testé côté serveur et la porte pour la salle suivante se déverrouille en cas de réussite de l’exercice.
 
-Le joueur possède un compagnon (ou “Follower”), qui doit être scripté par le joueur afin qu’il
-puisse participer à des combats. Jusqu’à quatre scripts de combat peuvent être enregistrés par
-le joueur. Ces derniers sont modifiables.
+Le joueur possède un compagnon (ou “Follower”), qui doit être scripté par le joueur afin qu’il puisse participer à des combats. Jusqu’à quatre scripts de combat peuvent être enregistrés par le joueur. Ces derniers sont modifiables.
 
-Un donjon se termine par un “Boss”, qui est un ennemi à vaincre pour finir le donjon. Lors d’un
-combat, le “Follower” du joueur va exécuter le premier script enregistré par le joueur. Il est
-possible de changer le script exécuté par le “Follower” en combat.
+Un donjon se termine par un “Boss”, qui est un ennemi à vaincre pour finir le donjon. Lors d’un combat, le “Follower” du joueur va exécuter le premier script enregistré par le joueur. Il est possible de changer le script exécuté par le “Follower” en combat.
 
-Nous ne rencontrons pour le moment aucun problème d’organisation. Nous avons mis en place
-différentes plateformes afin de respecter nos engagement et de permettre à n’importe lequel
-des membres de notre groupe de mettre au courant les autres en cas de problèmes.
+Nous ne rencontrons pour le moment aucun problème d’organisation. Nous avons mis en place différentes plateformes afin de respecter nos engagement et de permettre à n’importe lequel des membres de notre groupe de mettre au courant les autres en cas de problèmes.
 
 Les plateformes utilisées sont :
 
