@@ -37,28 +37,31 @@
 	</tbody>
 </table>
 
-## Table des matières {#toc}
-- [Description du document](#description-du-document)
-- [Tableau de révisions](#tdr)
+## 1. Table des matières {#toc}
+- <span class="h3-link">[Description du document](#description-du-document)</span>
+- <span class="h3-link">[Tableau de révisions](#tdr)</span>
 - [1. Table des matières](#toc)
 - [2. Organigramme des livrables](#organigramme-des-livrables)
 - [3. Cartes des livrables](#cartes-des-livrables)
 {{#data.deliverableCards}}
 	- [{{name}}](#carte-livrable-{{index}})
 {{/data.deliverableCards}}
-- [Stories](#stories)
+- [4. Stories](#stories)
 {{#data.deliverables}}
 	- [{{index}} {{name}}](#story-livrable-{{index}})
 	{{#categories}}
-		- {{index}} {{name}}
+		- [{{../index}}.{{index}} {{name}}](#story-livrable-{{../index}}-category-{{index}})
 		{{#stories}}
-			- [{{index}} {{title}}](#story-{{../../index}}.{{../index}}.{{index}})
+			- [{{../../index}}.{{../index}}.{{index}} {{title}}](#story-{{../../index}}.{{../index}}.{{index}})
 		{{/stories}}
 	{{/categories}}
 {{/data.deliverables}}
-- [4. Rapports d'avancement](#rapports-davancement)
+- [5. Rapports d'avancement](#rapports-davancement)
+{{#data.advancement_reports}}
+	- [{{title}}](#rapport-davancement-{{index}})
+{{/data.advancement_reports}}
 
-## 1. Organigramme des livrables
+## 2. Organigramme des livrables
 
 ```{.mermaid format=svg}
 graph TD
@@ -68,7 +71,7 @@ graph TD
 	{{/data.deliverables}}
 ```
 
-## 2. Cartes des livrables
+## 3. Cartes des livrables
 {{#data.deliverableCards}}
 <table id="carte-livrable-{{index}}" class="carte-livrable">
 	<thead>
@@ -93,16 +96,17 @@ graph TD
 </table>
 {{/data.deliverableCards}}
 
-## 3. Stories
+## 4. Stories
 {{#data.deliverables}}
 
 ### {{index}}. {{name}} { #story-livrable-{{index}} .story-livrable }
 	{{#categories}}
+#### {{../index}}.{{index}}. {{name}}  { #story-livrable-{{../index}}-category-{{index}} }
 		{{#stories}}
 <table class="story-card {{status}}">
 	<thead>
 		<tr class="key">
-			<th colspan="2" id="story-{{../../index}}.{{../index}}.{{index}}">{{../index}}.{{index}} {{title}}</th>
+			<th colspan="2" id="story-{{../../index}}.{{../index}}.{{index}}">{{../../index}}.{{../index}}.{{index}} {{title}}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -138,7 +142,13 @@ graph TD
 	{{/categories}}
 {{/data.deliverables}}
 
-## 4. Rapports d'avancement
+## 5. Rapports d'avancement
 <div class="rapports-davancement">
-{{data.advancement_reports}}
+{{#data.advancement_reports}}
+
+### {{title}} { #rapport-davancement-{{index}} }
+{{content}}
+
+{{#if @last}}{{else}}---{{/if}}
+{{/data.advancement_reports}}
 </div>

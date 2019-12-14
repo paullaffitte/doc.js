@@ -23,7 +23,7 @@ body {
 	color: #666666;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
 	font-weight: normal;
 }
 
@@ -35,6 +35,11 @@ h2 {
 h3, #description-du-document, #tdr {
 	font-size: 14pt;
 	color: #434343;
+}
+
+h4 {
+	font-size: 12pt;
+	color: #666666;
 }
 
 table {
@@ -82,6 +87,34 @@ th, td {
 
 th:first-letter, td:first-letter {
 	text-transform: uppercase;
+}
+
+ul li {
+	font-weight: bold;
+	list-style-type: none;
+}
+
+ul li a {
+	text-decoration: none;
+	color: black;
+	margin-bottom: 0.6em;
+	display: inline-block;
+}
+
+ul li a:hover {
+	text-decoration: underline;
+}
+
+ul ul li, .h3-link {
+	font-weight: normal;
+}
+
+ul ul li a, .h3-link a {
+	margin-bottom: 0.3em;
+}
+
+.h3-link a {
+	margin-left: 40px;
 }
 
 #revisions .date, #revisions .version {

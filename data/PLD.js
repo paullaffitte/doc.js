@@ -192,8 +192,20 @@ module.exports = async (metadata, revisions, folder) => {
 	const months = [ 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre' ];
 	const timezoneOffset = -Math.floor(date.getTimezoneOffset() / 60);
 
+	const advancement_reports = fs.readFileSync(`${folder}/advancement_reports.md`)
+		.toString()
+		.split('---')
+		.map((report, index, reports) => {
+			report = report.trim().split('\n');
+			return {
+				index: reports.length - index - 1,
+				title: report.shift().replace(/^###\s*/, ''),
+				content: report.join('\n')
+			}
+		});
+
 	return {
-		advancement_reports: fs.readFileSync(`${folder}/advancement_reports.md`).toString(),
+		advancement_reports,
 		date: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`,
 		time: `${date.getHours()}h${date.getMinutes()} (GMT${timezoneOffset >= 0 ? ('+' + timezoneOffset) : timezoneOffset})`,
 		currentYear: date.getFullYear(),
