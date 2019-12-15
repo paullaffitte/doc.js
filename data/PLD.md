@@ -38,6 +38,7 @@
 </table>
 
 ## 1. Table des matières {#toc}
+<div class="toc">
 - <span class="h3-link">[Description du document](#description-du-document)</span>
 - <span class="h3-link">[Tableau de révisions](#tdr)</span>
 - [1. Table des matières](#toc)
@@ -60,6 +61,7 @@
 {{#data.advancement_reports}}
 	- [{{title}}](#rapport-davancement-{{index}})
 {{/data.advancement_reports}}
+</div>
 
 ## 2. Organigramme des livrables
 

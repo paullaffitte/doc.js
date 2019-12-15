@@ -6,11 +6,27 @@ Les réalisations sont :
 
 - Paul :
 	- Stack : Création d’une stack docker-compose pour le développement
-	- Autre : Finitions sur la génération du PLD (design)
-	- Autre : Vectorisation du logo Teksploit
-	- Autre : Écriture du document de description du projet
+	- Documents : Finitions sur la génération du PLD (design)
+	- Documents : Vectorisation du logo Teksploit
+	- Documents : Écriture du document de description du projet
 	- Autre : Recherche d'un nouveau membre à recruter
-	- Autre : Écriture du rapport d'avancement pour le PLD
+	- Documents : Écriture du rapport d'avancement pour le PLD
+- Pierre :
+	- Documents : Mise en place d’un wiki pour utilisateurs
+	- Documents : Mise en place d’un wiki pour développeurs
+	- Documents : Création d’une page d’instruction pour travailler sur le projet
+	- Documents : Création d’un changelog
+- Ethan :
+	- Client : Upgrade du projet vers Unity 2019
+	- Utilisation de Photon Engine pour les communications réseaux
+	- Refactor du code réseau client-side afin d’intégrer Photon Engine
+- Guillaume :
+	- Ajout d'un outline de sélection dans l'éditeur de niveau
+	- Ajout d'un outil facilitant les déplacements des éléments des niveaux
+	- Menu de sélection regroupant les éléments du niveau par thématique
+- Alexandre :
+	- Mise en place d’une inscription et connexion sur le site publique
+	- Création d’une page de profil utilisateur
 
 ---
 

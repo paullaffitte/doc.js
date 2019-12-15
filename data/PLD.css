@@ -89,31 +89,31 @@ th:first-letter, td:first-letter {
 	text-transform: uppercase;
 }
 
-ul li {
+.toc ul li {
 	font-weight: bold;
 	list-style-type: none;
 }
 
-ul li a {
+.toc ul li a {
 	text-decoration: none;
 	color: black;
 	margin-bottom: 0.6em;
 	display: inline-block;
 }
 
-ul li a:hover {
+.toc ul li a:hover {
 	text-decoration: underline;
 }
 
-ul ul li, .h3-link {
+.toc ul ul li, .toc .h3-link {
 	font-weight: normal;
 }
 
-ul ul li a, .h3-link a {
+.toc ul ul li a, .toc .h3-link a {
 	margin-bottom: 0.3em;
 }
 
-.h3-link a {
+.toc .h3-link a {
 	margin-left: 40px;
 }
 

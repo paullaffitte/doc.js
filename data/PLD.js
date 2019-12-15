@@ -132,7 +132,7 @@ module.exports = async (metadata, revisions, folder) => {
 			dod,
 			timeEstimate,
 			timeSpent,
-			status: labels.includes('Doing') ? 'doing' : (closed_at ? 'done' : 'todo'),
+			status: closed_at ? 'done' : (labels.includes('Doing') ? 'doing' : 'todo'),
 			assignee: assignee ? assignee.name : 'Personne'
 		};
 	}))).filter(Boolean);
