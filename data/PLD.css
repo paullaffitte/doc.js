@@ -9,6 +9,10 @@ body {
 	height: 9cm;
 }
 
+.no-break {
+	page-break-inside: avoid;
+}
+
 #title, #sub-title {
 	text-align: center;
 }

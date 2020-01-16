@@ -103,8 +103,10 @@ graph TD
 
 ### {{index}}. {{name}} { #story-livrable-{{index}} .story-livrable }
 	{{#categories}}
-#### {{../index}}.{{index}}. {{name}}  { #story-livrable-{{../index}}-category-{{index}} }
 		{{#stories}}
+{{#if @first}}<div class="no-break">
+#### {{../../index}}.{{../index}}. {{../name}}  { #story-livrable-{{../../index}}-category-{{../index}} }
+{{/if}}
 <table class="story-card {{status}}">
 	<thead>
 		<tr class="key">
@@ -140,6 +142,7 @@ graph TD
 		</tr>
 	</tbody>
 </table>
+{{#if @first}}</div>{{/if}}
 		{{/stories}}
 	{{/categories}}
 {{/data.deliverables}}
