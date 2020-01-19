@@ -16,8 +16,6 @@ metadata:
     - livrables
     - évolution
   promotion: 2021
-  date de mise à jour: 14/07/2019
-  version: '3.0.0'
 
 prebuild: PLD.js
 revisions:
@@ -107,6 +105,12 @@ revisions:
       - Paul Laffitte
     sections: [ stories, rapports ]
     comments: Ajout d’un rapport pour le follow-up du troisième sprint et mise à jour de l'avancement des stories
+  - date: 14/10/2019
+    version: '3.2.0'
+    authors:
+      - Paul Laffitte
+    sections: [ rapports ]
+    comments: Ajout d’un rapport pour le delivery du troisième sprint
 
 pdf:
   margin:

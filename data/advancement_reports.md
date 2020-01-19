@@ -1,3 +1,21 @@
+### 19/01/2020 - Rapport d’avancement pour le Delivery du troisième sprint
+
+Pour le delivery du troisième sprint, les objectifs n'ont malheuresement pas été atteints, très peu de tâches ont été commencées et encore moins terminées. L'équipe n'a globalement pas communiqué et l'investissement a été au plus bas. Face à ce constat, le chef de groupe Paul Laffitte à décidé de quitter le groupe, ce qui ramène encore une fois le nombre total de membres à 4.
+
+Les réalisations sont :
+
+- Paul :
+	- Admin : Système d'authentification unique sur les differents domaines
+	- Website : Renouvellement du certificat SSL
+	- Contenu : Création des sujets pour un deuxième donjon
+	- Stack : Mise en production des livrables fonctionnels
+	- Documents : Écriture du rapport d'avancement pour le PLD
+	- Documents : Préparation du powerpoint pour le delivery
+- Reste de l'équipe :
+	- Pas d'avancement connu
+
+---
+
 ### 13/12/2019 - Rapport d’avancement pour le Follow-Up du troisième sprint
 
 Lors de ce premier follow-up, nos objectifs étaient principalement d'avoir un nouveau server fonctionnel avec quelques des fonctionnalités déjà présentes sur la version précédente ainsi que de recruter un dernier membre dans notre équipe. Nous avons également du intégrer notre nouveau membre et le guider dans l'accomplissement de ses tâches.
