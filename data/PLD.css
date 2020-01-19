@@ -46,10 +46,18 @@ h4 {
 	color: #666666;
 }
 
+table#revisions {
+	page-break-inside: auto;
+}
+
 table {
 	border-collapse: collapse;
 	width: 100%;
 	margin-bottom: 1em;
+	page-break-inside: avoid;
+}
+
+tr {
 	page-break-inside: avoid;
 }
 

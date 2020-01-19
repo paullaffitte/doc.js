@@ -31,7 +31,7 @@ console.error = (...args) => _console.error(chalk.red(...args));
 
 function showTimeEstimations(stories) {
 	if (stories.length == 0) {
-		console.warn('There is no story make statistics.');
+		console.warn('There is no story to make statistics about.');
 		return;
 	}
 
@@ -203,6 +203,10 @@ module.exports = async (metadata, revisions, folder) => {
 				content: report.join('\n')
 			}
 		});
+
+	metadata['date de mise à jour'] = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+	if (revisions.length > 0)
+		metadata.version = revisions[revisions.length - 1].version;
 
 	return {
 		advancement_reports,
