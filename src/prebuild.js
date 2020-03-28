@@ -6,17 +6,17 @@ const mkdirp = require('mkdirp').sync;
 const handlebars = require('handlebars');
 const yaml = require('yaml-js');
 
-function loadSettings(parsedPath) {
-	const fullpath = `${parsedPath.dir}/${parsedPath.name}${parsedPath.ext}`
+function loadSettings(input) {
+	const fullpath = `${input.directory}/${input.name}${input.extension}`
 
-	switch (parsedPath.ext) {
+	switch (input.extension) {
 		case '.json':
 			return require(fullpath);
 		case '.yml':
 		case '.yaml':
 			return yaml.load(fs.readFileSync(fullpath));
 		default:
-			throw new Error(`Extension "${parsedPath.ext}" is not supported`)
+			throw new Error(`Extension "${input.extension}" is not supported`)
 	}
 }
 
@@ -32,12 +32,9 @@ function renderTemplate(filename, view) {
 	return handlebars.compile(template)(view).trim();
 }
 
-module.exports = async (filename, outputName) => {
-	const settingsPath = path.isAbsolute(filename) ? filename : path.resolve(filename);
-	const parsedSettingsPath = path.parse(settingsPath);
-	const { revisions, prebuild: prebuildPath, metadata, pdf } = loadSettings(parsedSettingsPath);
-	const folder = path.dirname(settingsPath);
-	const prebuild = prebuildPath ? require(`${folder}/${prebuildPath}`) : () => {};
+module.exports = async (input, output) => {
+	const { revisions, prebuild: prebuildPath, metadata, pdf } = loadSettings(input);
+	const prebuild = prebuildPath ? require(`${input.directory}/${prebuildPath}`) : () => {};
 
 	metadataArray = Object.keys(metadata).map(name => {
 		const rawValue = metadata[name];
@@ -55,7 +52,7 @@ module.exports = async (filename, outputName) => {
 	const baseView = {
 		metadata,
 		revisions,
-		folder
+		directory: input.directory
 	};
 	const view = {
 		...baseView,
@@ -65,17 +62,18 @@ module.exports = async (filename, outputName) => {
 		}),
 	};
 
-	const content = renderTemplate(parsedSettingsPath.dir + '/' + parsedSettingsPath.name + '.md', view);
-	const header = renderTemplate(parsedSettingsPath.dir + '/header.md', view);
-	const footer = renderTemplate(parsedSettingsPath.dir + '/footer.md', view);
+	const content = renderTemplate(input.directory + '/' + input.name + '.md', view);
+	const header = renderTemplate(input.directory + '/header.md', view);
+	const footer = renderTemplate(input.directory + '/footer.md', view);
 
-	mkdirp('./build');
-	fs.writeFileSync('./build/prebuild.md', content);
-	fs.writeFileSync(`./build/${outputName}.json`, JSON.stringify(view, null, '\t'));
+	mkdirp(output.directory);
+	const prebuildOutput = output.getPath('prebuild.md');
+	fs.writeFileSync(prebuildOutput, content);
+	// fs.writeFileSync(`./build/${outputName}.json`, JSON.stringify(view, null, '\t'));
 
 	return {
 		...pdf,
-		folder,
+		prebuildOutput,
 		header,
 		footer,
 	};

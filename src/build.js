@@ -63,9 +63,11 @@ async function html2Pdf(inputLocation, outputFilename, options) {
 
 // TODO check pandoc version >=2.7.x
 
+const cwd = process.cwd();
 commander
 	.option('-f, --format <extension>', 'output format', parseFormat)
-	.option('-o, --output <filename>', 'output filename')
+	.option('-o, --output <directory>', 'output directory')
+	.option('-t, --title <title>', 'document title (do not include the extension)')
 	.parse(process.argv);
 
 if (commander.args.length < 1)
@@ -73,23 +75,31 @@ if (commander.args.length < 1)
 if (!commander.format)
 	commander.format = 'pdf';
 
-const filename = commander.args[0];
-const documentName = path.parse(filename).name;
-const output = commander.output || `./build/${documentName}.html`;
-const parsedOutput = path.parse(output);
+function getFileInfo(filename) {
+	const fullpath = path.resolve(filename);
+	const { dir, ext, base, name } = path.parse(fullpath);
+	return {
+		filename: fullpath,
+		directory: dir,
+		extension: ext,
+		name,
+		getPath: subpath => `${dir}/${subpath}`,
+	};
+}
 
-if (output.name && output.ext.length == 0)
-	commander.output += '.html';
+const input = getFileInfo(commander.args[0]);
+const output = getFileInfo(`${commander.output || (cwd + '/build')}/${commander.title || input.name}.html`)
+process.chdir(input.directory);
 
-prebuild(filename, output.name || documentName).then((options) => {
-	const cssFilename = `${options.folder}/${documentName}.css`;
+prebuild(input, output).then((options) => {
+	const cssFilename = `${input.directory}/${input.name}.css`;
 	const command = [
-		'build/prebuild.md',
-		'-o', output,
+		options.prebuildOutput,
+		'-o', output.filename,
 		'--from', 'markdown-markdown_in_html_blocks+raw_html+auto_identifiers+header_attributes',
 		'-F', 'mermaid-filter',
 		'-t', 'html5',
-		'--metadata', `pagetitle=${documentName}`,
+		'--metadata', `pagetitle=${input.name}`,
 		'--css', cssFilename,
 		'--standalone'
 	];
@@ -97,10 +107,10 @@ prebuild(filename, output.name || documentName).then((options) => {
 	console.log('pandoc', command.join(' '));
 	execa('pandoc', command)
 	.then(() => {
-		fs.unlinkSync('build/prebuild.md');
+		fs.unlinkSync(options.prebuildOutput);
 		if (commander.format == 'pdf') {
-			const htmlPath = path.resolve(`${__dirname}/../${output}`);
-			const outputFilename = [ parsedOutput.dir, '/', parsedOutput.name, '.pdf' ].join('');
+			const htmlPath = output.filename;
+			const outputFilename = `${output.directory}/${output.name}.pdf`
 			console.log('Generating pdf with puppeteer', outputFilename);
 			html2Pdf(`file://${htmlPath}`, outputFilename, { ...options, cssFilename });
 		}
