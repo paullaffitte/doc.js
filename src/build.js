@@ -21,7 +21,7 @@ function parseFormat(value) {
 
 async function incorporateImagesAndStyle(html, css, margin) {
 	const matches = html.matchAll(/<img[^>]*? src="([^"]*)"/g);
-  const style = `
+	const style = `
 font-size: 8pt;
 margin-left: calc(${margin.left} * 0.78);
 margin-right: calc(${margin.right} * 0.78);
@@ -38,27 +38,27 @@ height: calc(100% - 0.185in);`;
 
 async function html2Pdf(inputLocation, outputFilename, options) {
 	const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  const { header, footer, margin } = options;
-  const css = fs.existsSync(options.cssFilename) ? fs.readFileSync(options.cssFilename).toString() : '';
+	const page = await browser.newPage();
+	const { header, footer, margin } = options;
+	const css = fs.existsSync(options.cssFilename) ? fs.readFileSync(options.cssFilename).toString() : '';
 
-  await page.goto(inputLocation, { waitUntil: 'networkidle2' });
-  await page.pdf({
-  	path: outputFilename,
-  	format: 'A4',
-  	displayHeaderFooter: true,
-  	printBackground: true,
-  	headerTemplate: await incorporateImagesAndStyle(header, css, margin),
-  	footerTemplate: await incorporateImagesAndStyle(footer, css, margin),
-  	margin: {
-  		top: margin.top,
-  		bottom: margin.bottom,
-  		left: margin.left,
-  		right: margin.right,
-  	}
-  });
+	await page.goto(inputLocation, { waitUntil: 'networkidle2' });
+	await page.pdf({
+		path: outputFilename,
+		format: 'A4',
+		displayHeaderFooter: true,
+		printBackground: true,
+		headerTemplate: await incorporateImagesAndStyle(header, css, margin),
+		footerTemplate: await incorporateImagesAndStyle(footer, css, margin),
+		margin: {
+			top: margin.top,
+			bottom: margin.bottom,
+			left: margin.left,
+			right: margin.right,
+		}
+	});
 
-  await browser.close();
+	await browser.close();
 }
 
 // TODO check pandoc version >=2.7.x
