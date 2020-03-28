@@ -82,7 +82,7 @@ if (output.name && output.ext.length == 0)
 	commander.output += '.html';
 
 prebuild(filename, output.name || documentName).then((options) => {
-	const cssFilename = `${options.documentFolder}/${documentName}.css`;
+	const cssFilename = `${options.folder}/${documentName}.css`;
 	const command = [
 		'build/prebuild.md',
 		'-o', output,

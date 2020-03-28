@@ -1,6 +1,5 @@
 #! /usr/bin/env node
 
-const table = require('markdown-table');
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp').sync;
@@ -37,22 +36,33 @@ module.exports = async (filename, outputName) => {
 	const settingsPath = path.isAbsolute(filename) ? filename : path.resolve(filename);
 	const parsedSettingsPath = path.parse(settingsPath);
 	const { revisions, prebuild: prebuildPath, metadata, pdf } = loadSettings(parsedSettingsPath);
-	const documentFolder = path.dirname(settingsPath);
-	const prebuild = prebuildPath ? require(`${documentFolder}/${prebuildPath}`) : () => {};
+	const folder = path.dirname(settingsPath);
+	const prebuild = prebuildPath ? require(`${folder}/${prebuildPath}`) : () => {};
 
-	const metadataArray = Object.keys(metadata).map(key => [ key, Array.isArray(metadata[key]) ? metadata[key].join(', ') : metadata[key] ]);
-	const metadataTable = table([ ["", ""], ...metadataArray ]);
-	const revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => [ date, version, authors ? authors.join(', ') : '', sections ? sections.join(', ') : '', comments ]);
-	const revisionsTable = table([ ["", ""], ...revisionsArray ]);
+	metadataArray = Object.keys(metadata).map(name => {
+		const rawValue = metadata[name];
+		const value = Array.isArray(rawValue) ? rawValue.join(', ') : rawValue;
+		return { name, value };
+	});
+	revisionsArray = revisions.map(({ date, version, authors, sections, comments }) => ({
+		date,
+		version,
+		authors: authors ? authors.join(', ') : '',
+		sections: sections ? sections.join(', ') : '',
+		comments
+	}));
 
-	const view = {
+	const baseView = {
 		metadata,
 		revisions,
-		data: await prebuild(metadata, revisions, documentFolder),
-		tables: {
-			metadata: metadataTable,
-			revisions: revisionsTable,
-		}
+		folder
+	};
+	const view = {
+		...baseView,
+		data: await prebuild({
+			...baseView,
+			handlebars
+		}),
 	};
 
 	const content = renderTemplate(parsedSettingsPath.dir + '/' + parsedSettingsPath.name + '.md', view);
@@ -61,15 +71,11 @@ module.exports = async (filename, outputName) => {
 
 	mkdirp('./build');
 	fs.writeFileSync('./build/prebuild.md', content);
-	view.tables = {
-		metadata: metadataArray,
-		revisions: revisionsArray,
-	};
 	fs.writeFileSync(`./build/${outputName}.json`, JSON.stringify(view, null, '\t'));
 
 	return {
 		...pdf,
-		documentFolder,
+		folder,
 		header,
 		footer,
 	};
