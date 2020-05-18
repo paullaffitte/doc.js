@@ -62,18 +62,16 @@ module.exports = async (input, output) => {
 		}),
 	};
 
-	const content = renderTemplate(input.directory + '/' + input.name + '.md', view);
-	const header = renderTemplate(input.directory + '/header.md', view);
-	const footer = renderTemplate(input.directory + '/footer.md', view);
+	const content = renderTemplate(input.directory + '/' + input.name + '.html', view);
+	const header = renderTemplate(input.directory + '/header.html', view);
+	const footer = renderTemplate(input.directory + '/footer.html', view);
 
 	mkdirp(output.directory);
-	const prebuildOutput = output.getPath('prebuild.md');
-	fs.writeFileSync(prebuildOutput, content);
-	// fs.writeFileSync(`./build/${outputName}.json`, JSON.stringify(view, null, '\t'));
+	fs.writeFileSync(output.filename, content);
+	fs.writeFileSync(output.getPath(output.name + '.json'), JSON.stringify(view, null, '\t'));
 
 	return {
 		...pdf,
-		prebuildOutput,
 		header,
 		footer,
 	};

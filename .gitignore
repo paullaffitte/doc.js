@@ -1,6 +1,2 @@
 node_modules
 build
-*.pdf
-*.html
-*.log
-mermaid-filter.err

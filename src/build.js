@@ -1,10 +1,8 @@
 #! /usr/bin/env node
 
-const execa = require('execa');
 const commander = require('commander');
 const fs = require('fs');
 const path = require('path');
-const RenderPDF = require('chrome-headless-render-pdf');
 const puppeteer = require('puppeteer');
 const image2base64 = require('image-to-base64');
 const prebuild = require('./prebuild');
@@ -61,8 +59,6 @@ async function html2Pdf(inputLocation, outputFilename, options) {
 	await browser.close();
 }
 
-// TODO check pandoc version >=2.7.x
-
 const cwd = process.cwd();
 commander
 	.option('-f, --format <extension>', 'output format', parseFormat)
@@ -93,27 +89,10 @@ process.chdir(input.directory);
 
 prebuild(input, output).then((options) => {
 	const cssFilename = `${input.directory}/${input.name}.css`;
-	const command = [
-		options.prebuildOutput,
-		'-o', output.filename,
-		'--from', 'markdown-markdown_in_html_blocks+raw_html+auto_identifiers+header_attributes',
-		'-F', 'mermaid-filter',
-		'-t', 'html5',
-		'--metadata', `pagetitle=${input.name}`,
-		'--css', cssFilename,
-		'--standalone'
-	];
 
-	console.log('pandoc', command.join(' '));
-	execa('pandoc', command)
-	.then(() => {
-		fs.unlinkSync(options.prebuildOutput);
-		if (commander.format == 'pdf') {
-			const htmlPath = output.filename;
-			const outputFilename = `${output.directory}/${output.name}.pdf`
-			console.log('Generating pdf with puppeteer', outputFilename);
-			html2Pdf(`file://${htmlPath}`, outputFilename, { ...options, cssFilename });
-		}
-	})
-	.catch(err => console.error(err));
+	if (commander.format == 'pdf') {
+		const outputFilename = `${output.directory}/${output.name}.pdf`
+		console.log('Generating pdf with puppeteer', outputFilename);
+		html2Pdf(`file://${output.filename}`, outputFilename, { ...options, cssFilename });
+	}
 });
