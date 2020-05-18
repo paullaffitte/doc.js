@@ -38,7 +38,7 @@ async function html2Pdf(inputLocation, outputFilename, options) {
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 	const { header, footer, margin } = options;
-	const css = fs.existsSync(options.cssFilename) ? fs.readFileSync(options.cssFilename).toString() : '';
+	const css = options.headerAndFooterCss ? fs.readFileSync(options.headerAndFooterCss).toString() : '';
 
 	await page.goto(inputLocation, { waitUntil: 'networkidle2' });
 	await page.pdf({
@@ -88,11 +88,9 @@ const output = getFileInfo(`${commander.output || (cwd + '/build')}/${commander.
 process.chdir(input.directory);
 
 prebuild(input, output).then((options) => {
-	const cssFilename = `${input.directory}/${input.name}.css`;
-
 	if (commander.format == 'pdf') {
 		const outputFilename = `${output.directory}/${output.name}.pdf`
 		console.log('Generating pdf with puppeteer', outputFilename);
-		html2Pdf(`file://${output.filename}`, outputFilename, { ...options, cssFilename });
+		html2Pdf(`file://${output.filename}`, outputFilename, options);
 	}
 });

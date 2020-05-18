@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "commander": "^4.0.0",
+    "glob": "^7.1.6",
     "handlebars": "^4.5.2",
     "image-to-base64": "^2.0.1",
     "mkdirp": "^0.5.1",
