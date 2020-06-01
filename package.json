@@ -1,11 +1,14 @@
 {
   "name": "@paullaffitte/doc",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Paul Laffitte",
   "license": "MIT",
   "scripts": {
     "build": "./src/build.js",
     "clean": "rm -rvf build"
+  },
+  "bin": {
+    "doc-build": "./src/build.js"
   },
   "dependencies": {
     "commander": "^4.0.0",
