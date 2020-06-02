@@ -60,11 +60,37 @@ async function html2Pdf(inputLocation, outputFilename, options) {
 }
 
 const cwd = process.cwd();
+
 commander
 	.option('-f, --format <extension>', 'output format', parseFormat)
 	.option('-o, --output <directory>', 'output directory')
-	.option('-t, --title <title>', 'document title (do not include the extension)')
-	.parse(process.argv);
+	.option('-t, --title <title>', 'document title (do not include the extension)');
+
+const commanderParse = (graceful=false) => {
+	commander
+		.allowUnknownOption(graceful)
+		._exitCallback = null;
+
+	if (graceful) try {
+		commander
+			.exitOverride()
+			.parse(process.argv.filter(arg => !['-h', '--help'].includes(arg)));
+	} catch (err) {
+		// Ignore gracefully
+	} else {
+		commander.parse(process.argv);
+	}
+
+	return commander;
+};
+
+commanderParse(true);
+
+const onCommand = callback => {
+	if (callback)
+		callback(commander);
+	return commanderParse();
+};
 
 if (commander.args.length < 1)
 	throw new Error('Missing filename');
@@ -87,7 +113,7 @@ const input = getFileInfo(commander.args[0]);
 const output = getFileInfo(`${commander.output || (cwd + '/build')}/${commander.title || input.name}.html`)
 process.chdir(input.directory);
 
-prebuild(input, output).then((options) => {
+prebuild(input, output, onCommand).then((options) => {
 	if (commander.format == 'pdf') {
 		const outputFilename = `${output.directory}/${output.name}.pdf`
 		console.log('Generating pdf with puppeteer', outputFilename);

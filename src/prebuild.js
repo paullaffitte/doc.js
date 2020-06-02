@@ -58,9 +58,11 @@ async function copyAssets(source, destination, assets={}) {
 		.map(path => copyFile(source + '/' + path, destination + '/' + path)));
 }
 
-module.exports = async (input, output) => {
+module.exports = async (input, output, onCommand) => {
 	const { revisions, prebuild: prebuildPath, metadata, assets, pdf } = loadSettings(input);
 	const prebuild = prebuildPath ? require(`${input.directory}/${prebuildPath}`) : () => {};
+	const commander = onCommand(prebuild.onCommand);
+
 	copyAssets(input.directory, output.directory, assets);
 
 	metadataArray = Object.keys(metadata).map(name => {
@@ -85,7 +87,8 @@ module.exports = async (input, output) => {
 		...baseView,
 		data: await prebuild({
 			...baseView,
-			handlebars
+			handlebars,
+			commander,
 		}),
 	};
 
